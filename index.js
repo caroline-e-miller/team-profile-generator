@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const util = require('util');
+
 const saveMarkdown = util.promisify(fs.writeFile);
 
 // Creates an array of questions for user input
@@ -46,6 +47,7 @@ const questions = () => {
             type: 'input',
             name: 'engineerEmail',
             message: 'What is the engineers email address?',
+        },
         {
             type: 'input',
             name: 'engineerGithub',
@@ -65,12 +67,13 @@ const questions = () => {
             type: 'input',
             name: 'internEmail',
             message: 'What is the interns email address?',
+        },
         {
             type: 'input',
             name: 'internSchool',
             message: 'What is the interns school?',
         },
-    ])
+    ]);
 };
 
 const generateTeam = () =>
@@ -132,7 +135,7 @@ const generateTeam = () =>
 // Creates a function to initialize app
 function init() {
     questions()
-        .then((data) => saveMarkdown('index.html', generateTeam(data))) // generateMarkdown is a guess, generateHTML doesn't work
+        .then((data) => saveMarkdown('index.html', generateTeam(data)))
         .then(() => console.log('Wrote to index.hmtl.'))
         .catch((err) => console.error(err));
 };
