@@ -30,8 +30,8 @@ const questions = () => {
         {
             type: 'list',
             name: 'employee',
-            message: 'employee type',
-            choices: ['engineer', 'intern']
+            message: 'Would you like to add employees?',
+            choices: ['Engineer', 'Intern', 'Finished']
         },
         {
             type: 'input',
@@ -76,7 +76,7 @@ const questions = () => {
     ]);
 };
 
-const generateTeam = () =>
+const generateTeam = (data) =>
     `<!DOCTYPE html>
 <html lang="en">
 <!DOCTYPE html>
@@ -87,40 +87,55 @@ const generateTeam = () =>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+        <link rel="stylesheet" href="./dist/style.css">
     <title>Team Roster</title>
 </head>
 
 <body>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">Team Builder</span>
+                <li class="nav-item">
+                    <a class="nav-link" style="visibility:hidden" href="email.html">email</a>
+                 </li>
+            </div>
+        </nav>
     <div class='container'>
         <div class='row'>
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">Manager</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Our team manager is ${this.name}.
-                    - ID: ${this.id}.
-                    - Office number: ${this.officeNumber}.</p>
-                    <a href="#" class="card-link">${this.email}</a>
+                    <h6 class="card-subtitle mb-2 text-muted">Leading the way</h6>
+                    <p class="card-text">Our team manager is ${data.managerName}.</p>
+                    <ul>
+                        <li>ID: ${data.managerId}</li>
+                        <li>Office number: ${data.officeNumber}</li>
+                    </ul>
+                    <a href="#" class="card-link">${data.managerEmail}</a>
                 </div>
 
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Intern</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">One of our interns is ${this.name} from ${this.school}.
-                        - ID: ${this.id}.</p>
-                        <a href="#" class="card-link">${this.email}</a>
+                        <h6 class="card-subtitle mb-2 text-muted">Tomorrow's workforce</h6>
+                        <p class="card-text">One of our interns is ${data.internName} from the ${data.internSchool}.</p>
+                        <ul>
+                        <li>ID: ${data.internId}</li>
+                        </ul>
+                        <a href="#" class="card-link">${data.internEmail}</a>
                     </div>
                 </div>
 
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Engineer</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">One of our engineers is ${this.name}.
-                        - ID: ${this.id}</p>
-                        <a href="#" class="card-link">${this.email}</a>
-                        <a href="#" class="card-link">http://github.com/${this.github}</a>
+                        <h6 class="card-subtitle mb-2 text-muted">The heart of the operation</h6>
+                        <p class="card-text">One of our engineers is ${data.engineerName}.</p>
+                        <ul>
+                        <li>ID: ${data.internId}</li>
+                        </ul>
+                        <a href="#" class="card-link">${data.engineerEmail}</a>
+                        <a href="#" class="card-link">http://github.com/${data.engineerGithub}</a>
                     </div>
                 </div>
             </div>
