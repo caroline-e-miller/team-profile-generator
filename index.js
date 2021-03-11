@@ -95,9 +95,6 @@ const generateTeam = (data) =>
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <span class="navbar-brand mb-0 h1">Team Builder</span>
-                <li class="nav-item">
-                    <a class="nav-link" style="visibility:hidden" href="email.html">email</a>
-                 </li>
             </div>
         </nav>
     <div class='container'>
