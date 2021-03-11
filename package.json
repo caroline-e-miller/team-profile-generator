@@ -1,0 +1,17 @@
+{
+  "name": "team-build",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./lib/employee.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  },
+  "dependencies": {
+    "inquirer": "^8.0.0"
+  }
+}

@@ -110,6 +110,7 @@ const generateTeam = (data) =>
                     </ul>
                     <a href="#" class="card-link">${data.managerEmail}</a>
                 </div>
+            </div>
 
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
@@ -135,7 +136,6 @@ const generateTeam = (data) =>
                         <a href="#" class="card-link">http://github.com/${data.engineerGithub}</a>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </body>
