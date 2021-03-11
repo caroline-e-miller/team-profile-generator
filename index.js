@@ -10,7 +10,7 @@ const questions = () => {
         {
             type: 'input',
             name: 'managerName',
-            message: 'What the team managers name?',
+            message: 'What is the team managers name?',
         },
         {
             type: 'input',
@@ -36,7 +36,7 @@ const questions = () => {
         {
             type: 'input',
             name: 'engineerName',
-            message: 'What the engineers name?',
+            message: 'What is the engineers name?',
         },
         {
             type: 'input',
@@ -56,7 +56,7 @@ const questions = () => {
         {
             type: 'input',
             name: 'internName',
-            message: 'What the interns name?',
+            message: 'What is the interns name?',
         },
         {
             type: 'input',
@@ -120,7 +120,7 @@ const generateTeam = () =>
                         <p class="card-text">One of our engineers is ${this.name}.
                         - ID: ${this.id}</p>
                         <a href="#" class="card-link">${this.email}</a>
-                        <a href="#" class="card-link">${this.github}</a>
+                        <a href="#" class="card-link">http://github.com/${this.github}</a>
                     </div>
                 </div>
             </div>
