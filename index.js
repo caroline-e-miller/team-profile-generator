@@ -97,21 +97,19 @@ const generateTeam = () =>
                 <div class="card-body">
                     <h5 class="card-title">Manager</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">You can reach ${this.managerName} at ${this.managerEmail} or at ${this.managerGithub}.
-                    - ID: ${this.managerId}.
+                    <p class="card-text">Our team manager is ${this.name}.
+                    - ID: ${this.id}.
                     - Office number: ${this.officeNumber}.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
+                    <a href="#" class="card-link">${this.email}</a>
                 </div>
 
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Intern</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">You can reach ${this.internName} at ${this.internEmail} or at ${this.internGithub}.
-                        - ID: ${this.internId}.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                        <p class="card-text">One of our interns is ${this.name} from ${this.school}.
+                        - ID: ${this.id}.</p>
+                        <a href="#" class="card-link">${this.email}</a>
                     </div>
                 </div>
 
@@ -119,10 +117,10 @@ const generateTeam = () =>
                     <div class="card-body">
                         <h5 class="card-title">Engineer</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">You can reach ${this.engineerName} at ${this.engineerEmail} or at ${this.engineerGithub}.
-                        - ID: ${this.engineerId}</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                        <p class="card-text">One of our engineers is ${this.name}.
+                        - ID: ${this.id}</p>
+                        <a href="#" class="card-link">${this.email}</a>
+                        <a href="#" class="card-link">${this.github}</a>
                     </div>
                 </div>
             </div>
