@@ -109,17 +109,22 @@ function init() {
     starterQuestions()
         .then(async (data) => {
             addEmployee = data.employee !== 'Finished';
+            console.log(addEmployee, 'addEmployee')
+            console.log(data.employee, 'data.employee')
+            let employeeType = data.employee;
             while (addEmployee) {
-                if (data.employee === 'Engineer') {
+                if (employeeType === 'Engineer') {
                     // prompt engineer questions
                     await promptEngineerQuestions().then((engineerData) => {
                         engineers.push(engineerData);
+                        employeeType = engineerData.employee;
                         addEmployee = engineerData.employee !== 'Finished';
                     })
-                } else if (data.employee === 'Intern') {
+                } else if (employeeType === 'Intern') {
                     // prompt intern questions
                     await promptInternQuestions().then((internData) => {
                         interns.push(internData);
+                        employeeType = internData.employee;
                         addEmployee = internData.employee !== 'Finished';
                     })
                 }
@@ -128,7 +133,7 @@ function init() {
             data.interns = interns;
             saveMarkdown('index.html', generateTeam(data))
         })
-        .then(() => console.log('Wrote to index.hmtl.'))
+        .then(() => console.log('Wrote to index.html.'))
         .catch((err) => console.error(err));
 };
 
@@ -166,24 +171,26 @@ const generateTeam = (data) =>
                         <li>ID: ${data.managerId}</li>
                         <li>Office number: ${data.officeNumber}</li>
                     </ul>
-                    <a href="#" class="card-link">${data.managerEmail}</a>
+                    <a href="mailto:${data.managerEmail}">Email</a>
                 </div>
             </div>
         </div>
 
             <div class="row">
-                <div class="card" style="width: 18rem;">
+            ${data.interns.map(data => {
+        return `<div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Intern</h5>
                         <h6 class="card-subtitle mb-2 text-muted">Tomorrow's workforce</h6>
                         <p class="card-text">One of our interns is ${data.internName} from the ${data.internSchool}.</p>
                         <ul>
                         <li>ID: ${data.internId}</li>
+                        <li><a href="mailto:${data.internEmail}">Email</a></li>
                         </ul>
-                        <a href="#" class="card-link">${data.internEmail}</a>
-                    </div>
-                </div>
-            </div>    
+                        </div>
+                </div>`
+    })}
+            </div>
 
         <div class="row">
             ${data.engineers.map(data => {
@@ -195,8 +202,8 @@ const generateTeam = (data) =>
                     <ul>
                     <li>ID: ${data.engineerId}</li>
                     </ul>
-                    <a href="#" class="card-link">${data.engineerEmail}</a>
-                    <a href="#" class="card-link">http://github.com/${data.engineerGithub}</a>
+                    <li><a href="mailto:${data.internEmail}">Email</a></li>
+                    <li><a href="http://github.com/${data.engineerGithub}" target="_blank" class="card-link">Github</a></li>
                 </div>
             </div>`
     })}
