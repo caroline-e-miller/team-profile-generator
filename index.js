@@ -5,7 +5,7 @@ const util = require('util');
 const saveMarkdown = util.promisify(fs.writeFile);
 
 // Creates an array of questions for user input
-const questions = () => {
+const starterQuestions = () => {
     return inquirer.prompt([
         {
             type: 'input',
@@ -33,6 +33,11 @@ const questions = () => {
             message: 'Would you like to add employees?',
             choices: ['Engineer', 'Intern', 'Finished']
         },
+    ]);
+};
+
+function promptEngineerQuestions() {
+    return inquirer.prompt([
         {
             type: 'input',
             name: 'engineerName',
@@ -54,6 +59,18 @@ const questions = () => {
             message: 'What is the engineers Github username?',
         },
         {
+            type: 'list',
+            name: 'employee',
+            message: 'Would you like to add another employee?',
+            choices: ['Engineer', 'Intern', 'Finished']
+        },
+
+    ])
+}
+
+function promptInternQuestions() {
+    return inquirer.prompt([
+        {
             type: 'input',
             name: 'internName',
             message: 'What is the interns name?',
@@ -73,8 +90,49 @@ const questions = () => {
             name: 'internSchool',
             message: 'What is the interns school?',
         },
-    ]);
+        {
+            type: 'list',
+            name: 'employee',
+            message: 'Would you like to add another employee?',
+            choices: ['Engineer', 'Intern', 'Finished']
+        },
+    ])
+}
+
+
+
+// Creates a function to initialize app
+function init() {
+    let engineers = [];
+    let interns = [];
+    let addEmployee = false;
+    starterQuestions()
+        .then(async (data) => {
+            addEmployee = data.employee !== 'Finished';
+            while (addEmployee) {
+                if (data.employee === 'Engineer') {
+                    // prompt engineer questions
+                    await promptEngineerQuestions().then((engineerData) => {
+                        engineers.push(engineerData);
+                        addEmployee = engineerData.employee !== 'Finished';
+                    })
+                } else if (data.employee === 'Intern') {
+                    // prompt intern questions
+                    await promptInternQuestions().then((internData) => {
+                        interns.push(internData);
+                        addEmployee = internData.employee !== 'Finished';
+                    })
+                }
+            }
+            data.engineers = engineers;
+            data.interns = interns;
+            saveMarkdown('index.html', generateTeam(data))
+        })
+        .then(() => console.log('Wrote to index.hmtl.'))
+        .catch((err) => console.error(err));
 };
+
+
 
 const generateTeam = (data) =>
     `<!DOCTYPE html>
@@ -111,7 +169,9 @@ const generateTeam = (data) =>
                     <a href="#" class="card-link">${data.managerEmail}</a>
                 </div>
             </div>
+        </div>
 
+            <div class="row">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Intern</h5>
@@ -123,32 +183,29 @@ const generateTeam = (data) =>
                         <a href="#" class="card-link">${data.internEmail}</a>
                     </div>
                 </div>
+            </div>    
 
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Engineer</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">The heart of the operation</h6>
-                        <p class="card-text">One of our engineers is ${data.engineerName}.</p>
-                        <ul>
-                        <li>ID: ${data.internId}</li>
-                        </ul>
-                        <a href="#" class="card-link">${data.engineerEmail}</a>
-                        <a href="#" class="card-link">http://github.com/${data.engineerGithub}</a>
-                    </div>
+        <div class="row">
+            ${data.engineers.map(data => {
+        return `<div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Engineer</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">The heart of the operation</h6>
+                    <p class="card-text">One of our engineers is ${data.engineerName}.</p>
+                    <ul>
+                    <li>ID: ${data.engineerId}</li>
+                    </ul>
+                    <a href="#" class="card-link">${data.engineerEmail}</a>
+                    <a href="#" class="card-link">http://github.com/${data.engineerGithub}</a>
                 </div>
+            </div>`
+    })}
         </div>
     </div>
 </body>
 
 </html>;`
 
-// Creates a function to initialize app
-function init() {
-    questions()
-        .then((data) => saveMarkdown('index.html', generateTeam(data)))
-        .then(() => console.log('Wrote to index.hmtl.'))
-        .catch((err) => console.error(err));
-};
 
 // Function call to initialize app
 init();
