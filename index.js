@@ -157,7 +157,7 @@ const generateTeam = (data) =>
 <body>
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
-                <span class="navbar-brand mb-0 h1">Team Builder</span>
+                <span class="navbar-brand mb-0 h1" id="header">The Dream Team</span>
             </div>
         </nav>
     <div class='container'>
@@ -170,11 +170,28 @@ const generateTeam = (data) =>
                     <ul>
                         <li>ID: ${data.managerId}</li>
                         <li>Office number: ${data.officeNumber}</li>
+                        <li><a href="mailto:${data.managerEmail}">Email</a></li>
                     </ul>
-                    <a href="mailto:${data.managerEmail}">Email</a>
                 </div>
             </div>
         </div>
+
+        <div class="row">
+        ${data.engineers.map(data => {
+        return `<div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Engineer</h5>
+                <h6 class="card-subtitle mb-2 text-muted">The heart of the operation</h6>
+                <p class="card-text">One of our engineers is ${data.engineerName}.</p>
+                <ul>
+                    <li>ID: ${data.engineerId}</li>
+                    <li><a href="mailto:${data.internEmail}">Email</a></li>
+                    <li><a href="http://github.com/${data.engineerGithub}" target="_blank" class="card-link">Github</a></li>
+                <ul>
+            </div>
+        </div>`
+    })}
+    </div>
 
             <div class="row">
             ${data.interns.map(data => {
@@ -184,30 +201,15 @@ const generateTeam = (data) =>
                         <h6 class="card-subtitle mb-2 text-muted">Tomorrow's workforce</h6>
                         <p class="card-text">One of our interns is ${data.internName} from the ${data.internSchool}.</p>
                         <ul>
-                        <li>ID: ${data.internId}</li>
-                        <li><a href="mailto:${data.internEmail}">Email</a></li>
+                            <li>ID: ${data.internId}</li>
+                            <li><a href="mailto:${data.internEmail}">Email</a></li>
                         </ul>
                         </div>
                 </div>`
     })}
             </div>
 
-        <div class="row">
-            ${data.engineers.map(data => {
-        return `<div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Engineer</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">The heart of the operation</h6>
-                    <p class="card-text">One of our engineers is ${data.engineerName}.</p>
-                    <ul>
-                    <li>ID: ${data.engineerId}</li>
-                    </ul>
-                    <li><a href="mailto:${data.internEmail}">Email</a></li>
-                    <li><a href="http://github.com/${data.engineerGithub}" target="_blank" class="card-link">Github</a></li>
-                </div>
-            </div>`
-    })}
-        </div>
+        
     </div>
 </body>
 
