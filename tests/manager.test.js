@@ -1,5 +1,6 @@
 const { Manager } = require('../lib/employee');
 
+// test case for manager class
 describe("Manager", () => {
     describe("Initialization", () => {
         it("should create an object with 'name' string, 'id' number, 'officeNumber' number, and 'email' string", () => {

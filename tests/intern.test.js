@@ -1,5 +1,6 @@
 const { Intern } = require('../lib/employee');
 
+// test case for intern class
 describe("Employee", () => {
     describe("Initialization", () => {
         it("should create an object with 'name' string, 'id' number, 'school' string, and 'email' string", () => {
